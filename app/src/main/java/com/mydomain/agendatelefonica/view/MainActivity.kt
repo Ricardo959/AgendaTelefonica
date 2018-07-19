@@ -1,8 +1,11 @@
 package com.mydomain.agendatelefonica.view
 
 import android.content.Intent
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.Snackbar
+import android.widget.TextView
 import com.mydomain.agendatelefonica.R
 import com.mydomain.agendatelefonica.business.AgendaBusiness
 import io.realm.Realm
@@ -21,13 +24,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun configureMain() {
         loginBtn.setOnClickListener() {
-            val username = loginEdt.text.toString()
-            AgendaBusiness.searchUser(username, {
+            AgendaBusiness.login(loginEdt.text.toString(), passwordEdt.text.toString(), {
                 // On Sucess:
                 TODO()
             }, {
                 // On Error:
-                TODO()
+                displayErrorMessage(it)
             })
         }
 
@@ -36,9 +38,19 @@ class MainActivity : AppCompatActivity() {
             extraBundle.putString("log", loginEdt.text.toString()) // Colocando o Email no 'Bundle'para envio para a tela secundaria
             extraBundle.putString("psw", passwordEdt.text.toString()) // Colocando a senha no 'Bundle'para envio para a tela secundaria
 
-            val intentSideActivity = Intent(this, SignUpActivity::class.java)
-            intentSideActivity.putExtras(extraBundle)
-            startActivity(intentSideActivity)
+            val intentSignUp = Intent(this, SignUpActivity::class.java)
+            intentSignUp.putExtras(extraBundle)
+            startActivity(intentSignUp)
         }
+    }
+
+    private fun displayErrorMessage(message: String) {
+        val snackbar = Snackbar.make(rootLayout, message, Snackbar.LENGTH_LONG)
+
+        snackbar.view.setBackgroundColor(Color.RED)
+        snackbar.view.findViewById<TextView>(android.support.design.R.id.snackbar_text)
+                .setTextColor(Color.WHITE)
+
+        snackbar.show()
     }
 }

@@ -2,6 +2,7 @@ package com.mydomain.agendatelefonica.view
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.mydomain.agendatelefonica.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class SignUpActivity : AppCompatActivity() {

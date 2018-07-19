@@ -1,7 +1,8 @@
 package com.mydomain.agendatelefonica.business
 
 object AgendaBusiness {
-    fun searchUser(username: String, onSucess: () -> Unit, onError: () -> Unit) {
+    fun login(email: String, password: String, onSucess: () -> Unit, onError: (message: String) -> Unit) {
         TODO()
+        onSucess
     }
 }

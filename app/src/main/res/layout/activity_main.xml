@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.MainActivity">
@@ -26,8 +27,8 @@
 
             <ImageView
                 android:id="@+id/logo"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="32dp"
                 app:srcCompat="@drawable/logo" />
@@ -82,7 +83,7 @@
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="18dp"
                 android:text="@string/addAccount"
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp" />
