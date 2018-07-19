@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Agenda Telefonica</string>
+    <string name="user">Usuário:</string>
+    <string name="password">Senha:</string>
+    <string name="addAccount">Criar Conta</string>
+    <string name="login">Entrar</string>
+    <string name="exampleEmail">exemplo@email.com</string>
+    <string name="passwordConf">Confirmar senha:</string>
+</resources>
