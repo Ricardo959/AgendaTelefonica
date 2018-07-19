@@ -6,4 +6,10 @@
     <string name="login">Entrar</string>
     <string name="exampleEmail">exemplo@email.com</string>
     <string name="passwordConf">Confirmar senha:</string>
+    <string name="passwordHint">(minimo 8 caracteres)</string>
+    <string name="passwordError">As senhas nao sao iguais!!</string>
+    <string name="passwordError2">A senha tem menos que 8 caracteres!</string>
+    <string name="addUserError">Usuario ja existe!</string>
+    <string name="wait">Aguarde...</string>
+    <string name="loginError">Usuario ou senha incorreta!</string>
 </resources>

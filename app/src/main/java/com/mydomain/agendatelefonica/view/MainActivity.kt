@@ -23,13 +23,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun configureMain() {
-        loginBtn.setOnClickListener() {
+        loginBtn.setOnClickListener {
+            displayMessage(getString(R.string.wait))
+
             AgendaBusiness.login(loginEdt.text.toString(), passwordEdt.text.toString(), {
                 // On Sucess:
-                TODO()
+                TODO("Inflate new activity")
             }, {
                 // On Error:
-                displayErrorMessage(it)
+                displayErrorMessage(getString(R.string.loginError))
             })
         }
 
@@ -48,6 +50,16 @@ class MainActivity : AppCompatActivity() {
         val snackbar = Snackbar.make(rootLayout, message, Snackbar.LENGTH_LONG)
 
         snackbar.view.setBackgroundColor(Color.RED)
+        snackbar.view.findViewById<TextView>(android.support.design.R.id.snackbar_text)
+                .setTextColor(Color.WHITE)
+
+        snackbar.show()
+    }
+
+    private fun displayMessage(message: String) {
+        val snackbar = Snackbar.make(rootLayout, message, Snackbar.LENGTH_LONG)
+
+        snackbar.view.setBackgroundColor(Color.parseColor("#2095f2"))
         snackbar.view.findViewById<TextView>(android.support.design.R.id.snackbar_text)
                 .setTextColor(Color.WHITE)
 

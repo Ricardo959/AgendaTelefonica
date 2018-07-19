@@ -64,6 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:hint="@string/passwordHint"
                 android:inputType="textPassword" />
 
             <Button
@@ -84,6 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="18dp"
+                android:layout_marginBottom="18dp"
                 android:text="@string/addAccount"
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp" />
