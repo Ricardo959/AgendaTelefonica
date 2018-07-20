@@ -12,4 +12,15 @@
     <string name="addUserError">Usuario ja existe!</string>
     <string name="wait">Aguarde...</string>
     <string name="loginError">Usuario ou senha incorreta!</string>
+    <string name="addContact">Criar Contato</string>
+    <string name="emailObl">Email*</string>
+    <string name="nameObl">Nome*</string>
+    <string name="phoneOlb">Telefone*</string>
+    <string name="phoneHint">Numero com DDD...</string>
+    <string name="birth">Data de nascimento</string>
+    <string name="birthHint">Nascimento (DD/MM/AAAA)</string>
+    <string name="url">URL Imagem</string>
+    <string name="urlHint">Endereco URL da imagem...</string>
+    <string name="contactExistent">Contato ja existe!</string>
+    <string name="invalidContact">Erro ao criar contato. Verifique se os campos obligatorios estao corretos.</string>
 </resources>

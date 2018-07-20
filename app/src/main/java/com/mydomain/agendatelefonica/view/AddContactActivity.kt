@@ -8,41 +8,39 @@ import android.support.design.widget.Snackbar
 import android.widget.TextView
 import com.mydomain.agendatelefonica.R
 import com.mydomain.agendatelefonica.business.AgendaBusiness
-import kotlinx.android.synthetic.main.activity_sign_up.*
+import kotlinx.android.synthetic.main.activity_add_contact.*
 
-class SignUpActivity : AppCompatActivity() {
+class AddContactActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_up)
+        setContentView(R.layout.activity_add_contact)
 
-        configureSignUp()
+        setup()
     }
 
-    private fun configureSignUp() {
-        val email = intent.getStringExtra("log") // Recebendo a matricula da tela anterior
-        val password = intent.getStringExtra("psw") // Recebendo a senha da tela anterior
-
-        loginEdt.setText(email)
-        passwordEdt.setText(password)
+    private fun setup() {
 
         addBtn.setOnClickListener {
-            if (passwordEdt.text.toString() != passwordConfEdt.text.toString()) {
-                displayErrorMessage(getString(R.string.passwordError))
-            } else if (passwordEdt.text.length < 8) {
-                displayErrorMessage(getString(R.string.passwordError2))
+            if (nameEdt.text.length < 2 || emailEdt.text.length < 4 || phoneEdt.text.length < 4) {
+                displayErrorMessage(getString(R.string.invalidContact))
+
             } else {
-                // Create Account
                 displayMessage(getString(R.string.wait))
 
-                AgendaBusiness.addUser(loginEdt.text.toString(), passwordEdt.text.toString(), {
-                    // On Sucess:
+                AgendaBusiness.addContact(nameEdt.text.toString(),
+                        emailEdt.text.toString(),
+                        phoneEdt.text.toString(),
+                        1970,
+                        pictureEdt.text.toString(), {
+                    // On Success:
                     val intentContactList = Intent(this, ContactListActivity::class.java)
                     startActivity(intentContactList)
                 }, {
                     // On Error:
-                    displayErrorMessage(getString(R.string.addUserError))
+                    displayErrorMessage(getString(R.string.contactExistent))
                 })
+
             }
         }
 

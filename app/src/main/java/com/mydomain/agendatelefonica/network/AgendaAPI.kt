@@ -18,4 +18,10 @@ interface AgendaAPI {
     fun getContacts(@Header("Uid") uid: String,
                     @Header("Client") client: String,
                     @Header("Access-Token") accessToken: String): Observable<List<Contact>>
+
+    @POST(" /contacts")
+    fun addContact(@Header("Uid") uid: String,
+                   @Header("Client") client: String,
+                   @Header("Access-Token") accessToken: String,
+                   @Body contact: Contact): Observable<Contact>
 }

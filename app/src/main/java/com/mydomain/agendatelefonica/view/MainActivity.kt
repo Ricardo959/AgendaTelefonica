@@ -47,6 +47,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+
     private fun displayErrorMessage(message: String) {
         val snackbar = Snackbar.make(rootLayout, message, Snackbar.LENGTH_LONG)
 

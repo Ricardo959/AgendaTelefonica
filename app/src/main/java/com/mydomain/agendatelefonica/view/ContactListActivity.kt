@@ -1,5 +1,6 @@
 package com.mydomain.agendatelefonica.view
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.mydomain.agendatelefonica.R
@@ -20,6 +21,11 @@ class ContactListActivity : AppCompatActivity() {
         val (names, phones, emails) = AgendaBusiness.getNamePhoneEmail()
         recyclerView.adapter = ContactAdapter(names, phones, emails)
         recyclerView.setHasFixedSize(true)
+
+        addContactBtn.setOnClickListener {
+            val intentAddContactActivity = Intent(this, AddContactActivity::class.java)
+            startActivity(intentAddContactActivity)
+        }
     }
 
 }

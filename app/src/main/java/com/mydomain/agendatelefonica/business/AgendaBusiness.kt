@@ -2,6 +2,7 @@ package com.mydomain.agendatelefonica.business
 
 import android.util.Log
 import com.mydomain.agendatelefonica.database.AgendaDatabase
+import com.mydomain.agendatelefonica.model.Contact
 import com.mydomain.agendatelefonica.model.User
 import com.mydomain.agendatelefonica.network.AgendaNetwork
 
@@ -17,7 +18,7 @@ object AgendaBusiness {
         // Send to retrofit:
         AgendaNetwork.addUser(user, {
             // On Success:
-            // Login to retrofit:
+            // Login to retrofit
             AgendaNetwork.login(user, {
                 // On Success:
                 AgendaDatabase.clearDatabase()
@@ -56,7 +57,7 @@ object AgendaBusiness {
             // Login to retrofit:
             AgendaNetwork.login(user, {
                 // On Success:
-                Log.d("TAG", "User ${email} has been found online")
+                Log.d("TAG", "User ${email} has been found on network")
                 AgendaDatabase.clearDatabase()
                 AgendaDatabase.copyOrUpdateUser(it)
 
@@ -109,5 +110,44 @@ object AgendaBusiness {
         }
 
         return Triple(names, phones, emails)
+    }
+
+    fun addContact(name: String,
+                   email: String,
+                   phone: String,
+                   birth: Long,
+                   picture: String,
+                   onSuccess: () -> Unit,
+                   onError: () -> Unit) {
+
+        // Create contact:
+        val contact = Contact()
+        contact.name = name
+        contact.email = email
+        contact.phone = phone
+        contact.birth = birth
+        contact.picture = picture
+
+        AgendaDatabase.getUser {
+            it?.let {
+
+                // Send to retrofit:
+                Log.d("TAG", "Sending contact ${contact.name} to network")
+                AgendaNetwork.addContact(it, contact, {
+                    // On Success:
+                    // Update Contacts
+                    updateContacts({
+                        onSuccess()
+                    }, {
+                        Log.d("TAG", "Failed to ubdate database")
+                        onError()
+                    })
+                }, {
+                    Log.d("TAG", "Failed to send contact")
+                    onError()
+                })
+
+            }
+        }
     }
 }

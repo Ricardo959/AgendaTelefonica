@@ -67,4 +67,19 @@ object AgendaNetwork {
                     onError()
                 })
     }
+
+    fun addContact(user: User, contact: Contact, onSuccess: () -> Unit, onError: () -> Unit) {
+        AgendaAPI.addContact(user.uid.toString(),
+                user.client.toString(),
+                user.accessToken.toString(),
+                contact)
+
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    onSuccess()
+                }, {
+                    onError()
+                })
+    }
 }
