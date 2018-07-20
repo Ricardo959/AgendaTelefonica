@@ -2,7 +2,6 @@ package com.mydomain.agendatelefonica.business
 
 import android.util.Log
 import com.mydomain.agendatelefonica.database.AgendaDatabase
-import com.mydomain.agendatelefonica.model.Contact
 import com.mydomain.agendatelefonica.model.User
 import com.mydomain.agendatelefonica.network.AgendaNetwork
 
@@ -87,5 +86,28 @@ object AgendaBusiness {
                 })
             }
         }
+    }
+
+    fun getNamePhoneEmail(): Triple<List<String>, List<String>, List<String>> {
+
+        val names: MutableList<String> = mutableListOf()
+        val phones: MutableList<String> = mutableListOf()
+        val emails: MutableList<String> = mutableListOf()
+
+        AgendaDatabase.forAllContacts {
+            it.name?.let {
+                names.add(it)
+            }
+
+            it.phone?.let {
+                phones.add(it)
+            }
+
+            it.email?.let {
+                emails.add(it)
+            }
+        }
+
+        return Triple(names, phones, emails)
     }
 }

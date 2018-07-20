@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.mydomain.agendatelefonica.R
 import com.mydomain.agendatelefonica.adapter.ContactAdapter
+import com.mydomain.agendatelefonica.business.AgendaBusiness
 import kotlinx.android.synthetic.main.activity_contact_list.*
 
 class ContactListActivity : AppCompatActivity() {
@@ -16,7 +17,8 @@ class ContactListActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        recyclerView.adapter = ContactAdapter()
+        val (names, phones, emails) = AgendaBusiness.getNamePhoneEmail()
+        recyclerView.adapter = ContactAdapter(names, phones, emails)
         recyclerView.setHasFixedSize(true)
     }
 
