@@ -28,7 +28,8 @@ class MainActivity : AppCompatActivity() {
 
             AgendaBusiness.login(loginEdt.text.toString(), passwordEdt.text.toString(), {
                 // On Sucess:
-                TODO("Inflate new activity")
+                val intentContactList = Intent(this, ContactListActivity::class.java)
+                startActivity(intentContactList)
             }, {
                 // On Error:
                 displayErrorMessage(getString(R.string.loginError))

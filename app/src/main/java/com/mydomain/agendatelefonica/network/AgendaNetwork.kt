@@ -1,5 +1,6 @@
 package com.mydomain.agendatelefonica.network
 
+import com.mydomain.agendatelefonica.model.Contact
 import com.mydomain.agendatelefonica.model.User
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -13,6 +14,7 @@ object AgendaNetwork {
     }
 
     private fun getRetrofit(): Retrofit {
+
         return Retrofit.Builder()
                 .baseUrl("https://api-agenda-unifor.herokuapp.com")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -31,21 +33,36 @@ object AgendaNetwork {
                 })
     }
 
-    fun login(emailAndPasswordOnly: User, onSuccess: (user: User) -> Unit, onError: () -> Unit) {
-        AgendaAPI.login(emailAndPasswordOnly)
+    fun login(user: User, onSuccess: (user: User) -> Unit, onError: () -> Unit) {
+        AgendaAPI.login(user)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ response ->
+                .subscribe {
 
-                    val apiResponse = response?.body() //APIResponse
-                    val usuario = apiResponse.data
+                    it?.let {
+                        user.uid = it.headers().get("Uid")
+                        user.client = it.headers().get("Client")
+                        user.accessToken = it.headers().get("Access-Token")
+                    }
 
-                    usuario.uid = response?.headers().get("asdas")
-                    usuario.client = response?.headers().get("asdasd")
-                    usuario.accessToken = response?.headers().get("asdasd")
+                    if (user.uid == null || user.client == null || user.accessToken == null) {
+                        onError()
+                    } else {
+                        onSuccess(user)
+                    }
+                }
+    }
 
-                    onSuccess(usuario)
-
+    fun getContacts(user: User, onSuccess: (contacts: List<Contact>) -> Unit, onError: () -> Unit) {
+        AgendaAPI.getContacts(user.uid.toString(),
+                user.client.toString(),
+                user.accessToken.toString())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    it?.let {
+                        onSuccess(it)
+                    }
                 }, {
                     onError()
                 })
